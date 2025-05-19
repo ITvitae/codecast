@@ -21,7 +21,7 @@ Since nothing was done with the tool since 2021, it seemed about time to open so
 
 ```bash
 # Clone this repository.
-git clone `https://github.com/ITvitae/codecast`.
+git clone https://github.com/ITvitae/codecast
 
 # Create a new virtual environment, here called `env3`
 virtualenv -p python3 env3
@@ -42,7 +42,7 @@ Connect to the server with your browser by going to [http://localhost:5001](http
 
 ```bash
 # Clone this repository.
-git clone git@gitlab.com:Descrypt/codecast.git
+git clone https://github.com/ITvitae/codecast
 
 # Install flask
 pip3 install flask
