@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>{{ env_data }}</title>
+        <meta http-equiv="refresh" content="{{ refresh_time }}">
+        <link rel="stylesheet" href="static/styles.css">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖥</text></svg>">
+
+    </head>
+
+    <script src="/static/js/window_manager.js"></script>
+    <script src="/static/js/storage_manager.js"></script>
+    <script src="/static/js/buttons.js"></script>
+    <script src="/static/js/keys.js"></script>
+    <body>
+
+        <div id="top_bar">
+            <form method="POST" id="main_form">
+                <input list="runner_list"
+                       title="Set a runner"
+                       id="runner"
+                       name="runner"
+                       placeholder="Set a 🏃"
+                       value="{{ request.form['runner'] }}"
+                       autocomplete="off"
+                ><button title="Clear runner" class="top_bar_button" type="button" onclick="clear_runner()">
+                    <img class="button_icon" src="/static/images/x.svg" alt="Clear">
+                </button><button title="Run (⌃R)" class="top_bar_button" id="run_button" type="button" onclick="run()">
+                    <img class="button_icon" src="/static/images/play.svg" alt="Run">
+                </button>
+                <datalist id="runner_list">
+                    {% for option in runners %}
+                    {% if runners[option] == True %}
+                    <option>{{ option }}</option>
+                    {% else %}
+                    <option disabled>{{ option }}</option>
+                    {% endif %}
+                    {% endfor %}
+                    <option disabled>bla</option>
+                </datalist>
+                <input type ="hidden" name="left_window_width"
+                       id="left_window_width"
+                       placeholder="Width"
+                       value="{{ request.form['left_window_width'] }}" required></input>
+                <span class="top_bar_divider"></span>
+                <button title="Clear source" class="top_bar_button" type="button" onclick="clear_source()">
+                    <img class="button_icon" src="/static/images/x.svg" alt="Clear">
+                </button>
+                <button title="Clear source in local storage" class="top_bar_button" type="button" onclick="clear_local_source()">
+                    <img class="button_icon" src="/static/images/trash.svg" alt="Clear local source">
+                </button>
+                <span class="top_bar_divider"></span>
+                <button title="Output history" class="top_bar_button" type="button" onclick="print_history()">
+                    <img class="button_icon" src="/static/images/history.svg" alt="History">
+                </button>
+                <span class="top_bar_divider"></span>
+                <button title="Focus source" class="top_bar_button" type="button" onclick="focus_source()">
+                    <img class="button_icon" src="/static/images/align_right.svg" alt="Focus source">
+                </button>
+                <button title="Evenly space windows" class="top_bar_button" type="button" onclick="evenly_space_windows()">
+                    <img class="button_icon" src="/static/images/align_center.svg" alt="Evenly space windows">
+                </button>
+                <button title="Focus output" class="top_bar_button" type="button" onclick="focus_output()">
+                    <img class="button_icon" src="/static/images/align_left.svg" alt="Focus output">
+                </button>
+                <span class="top_bar_divider"></span>
+                <img class="button_icon" src="/static/images/zoom_in.svg" alt="Zoom" title="Set the page zoom level with the silder">
+                <input type="range"
+                       id="zoom_slider"
+                       onchange="change_page_zoom()"
+                       min="1"
+                       max="3"
+                       step="0.5"
+                       value="load('page_zoom', '3')"/>
+            </form>
+            <a
+                title="New tab"
+                type="button"
+                class="top_bar_button"
+                href="/"
+                target="_blank"
+                rel="noopener noreferrer"
+                id="new_tab">
+                <img class="button_icon" src="/static/images/plus.svg" alt="New tab">
+            </a>
+        </div>
+
+        <div id="windows">
+            <div class="window" id="source_window" style="width: {{ left_window_width }};">
+                <textarea form="main_form" name="source" id="source" method="POST" action="{{ request.form['source'] }}" style="font-size: {{ main_font_size }}em;"></textarea>
+            </div>
+
+            <script>
+             const source = document.getElementById("source");
+             source.value = load(source.id+"_value", "");
+             var zoom_slider = document.getElementById("zoom_slider");
+             zoom_slider.value = load("page_zoom", "3");
+             change_page_zoom()
+            </script>
+            <div class="resizer" id="window_resizer"></div>
+
+            <div class="window" id="output_window">
+                {% if html == True %}
+                {% for row in rows %}
+                {{ row | safe }}
+                {% endfor %}
+                {% else %}
+                {% if format_output == True %}
+                {% for row in rows %}
+                <span class="output" style="font-size: {{ main_font_size }}em;">{{ row | safe }}</span>
+                {% endfor %}
+                {% else %}
+                {% for row in rows %}
+                <span class="output">{{ row }}</span>
+                {% endfor %}
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+    </body>
+
+</html>

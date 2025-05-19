@@ -1,0 +1,269 @@
+:root {
+    /* colors */
+    --col-red: #FC4D8D;
+    --col-green: #5DFF00;
+    --col-blue: rgb(5, 168, 191);
+    --col-white: #ffffff;
+    --col-gray: rgb(80, 80, 80);
+    --col-orange: rgb(255, 108, 0);
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    background-color: var(--col-blue);
+    font-size: 2em;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: None;
+}
+
+#top_bar {
+    height: 1.5em;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: scroll;
+}
+
+.top_bar_divider {
+    display: inline-flex;
+    width: 0.1em;
+    padding: 0;
+    margin: 0;
+}
+
+label {
+    font-family: Source Code Pro, Hack, Courier New, monospace;
+    color: var(--col-gray);
+    font-size: 0.8em;
+}
+
+button {
+    cursor: pointer;
+}
+
+.top_bar_button {
+    height: 100%;
+    padding: 0 0em;
+    margin: 0;
+    font-size: 1.1em;
+
+
+    width: fit-content;
+    color: var(--col-white);
+    background: inherit;
+    border: 0;
+
+}
+
+#run_button {
+    color: var(--col-red);
+    border: 0;
+}
+
+.top_bar_button:hover {
+    color: var(--col-green) !important;
+    filter: drop-shadow(0px 0px 2px var(--col-green));
+}
+
+.button_icon {
+    width: 1em;
+    height: 1em;
+    max-width: 1em;
+    max-height: 1em;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+}
+
+#runner {
+    font-size: 0.75em;
+}
+
+#range_silder {
+    margin-left: 0.5em;
+}
+
+#new_tab {
+    margin-right: 0.5em;
+    margin-left: auto;
+}
+
+#windows {
+    width: 100vw;
+    height: calc(100vh - 1.5em);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.window {
+    height: calc(100vh - 1.5em);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    background-color: val(--col-red);
+}
+
+#source_window {
+    /* width: 50vw; */
+    flex-wrap: wrap;
+    color: white;
+}
+
+#output_window {
+    flex: 1;
+    background-color: black;
+    color: white;
+    /* font-size: 1em; */
+}
+
+.resizer {
+    width: 4px;
+    height: calc(100vh - 1.5em);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    cursor: ew-resize;
+    /* background-color: #5DFF00; */
+}
+
+#source {
+    width: 100%;
+    /* height: calc(100vh - 1.5em); */
+    height:100%;
+    margin: 0;
+    padding: 0;
+    resize: None;
+    border: None;
+    outline: None;
+    overflow-y: scroll;
+    background-color: white;
+    font-family: Source Code Pro, Hack, Courier New, monospace;
+    /* font-size: 1em; */
+    color: black;
+}
+
+.output {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Source Code Pro, Hack, Courier New, monospace;
+}
+
+.stdout:hover, .stderr:hover {
+    background: var(--col-gray);
+    color: black;
+}
+
+.stdout {
+    background-color: rgba(93, 255, 0, 0.2) ;
+}
+
+.stderr {
+    background-color: rgba(255,0,93, 0.2);
+}
+
+/* Title screen hacks */
+
+#title_background {
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    height: 100%;
+    max-height: calc(100vh - 1.5em);
+    background: var(--col-blue);
+    padding: 0;
+    margin: 0;
+}
+
+#title {
+    font-family: Source Code Pro, Hack, Courier New, monospace;
+    font-size: 2em;
+    padding: 0;
+    margin: 1em auto;
+}
+
+#itvitae_logo {
+    height: 3em;
+    width: auto;
+    padding: 0;
+    margin: 0 auto;
+}
+
+#logo_link {
+    padding: 0;
+    margin: 0 auto;
+}
+
+#console {
+    display: none;
+    font-size: 1em;
+    width: 100%;
+    height: auto;
+    max-height: 10em;
+    background: black;
+    padding: 0;
+    margin: 0;
+    margin-top: auto;
+    overflow-y: scroll;
+    box-shadow: 2px 2px;
+    /* border-top: 1px white; */
+    /* border-style: solid none solid none; */
+}
+
+.console_data {
+    display: block;
+    height: 1em;
+    width: 100%;
+    font-size: 1.0em;
+    color: white;
+    background: black;
+    margin: 0;
+    padding: 0;
+}
+
+.runner_enabled {
+    height: inherit;
+    color: var(--col-green);
+}
+
+.runner_disabled {
+    height: inherit;
+    color: var(--col-red);
+}
+
+#console_menu {
+    width: 100%;
+    height: 1.5em;
+    background: inherit;
+    padding: 0;
+    margin: 0;
+    margin-top: auto;
+}
+
+.console_button {
+    width: fit-content;
+    height: 100%;
+    font-size: 0.9em;
+    padding: 0 0.5em;
+    margin: 0;
+    color: var(--col-white);
+    background: inherit;
+    border: 0;
+}
+
+
